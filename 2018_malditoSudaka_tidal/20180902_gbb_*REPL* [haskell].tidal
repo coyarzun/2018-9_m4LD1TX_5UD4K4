@@ -1,0 +1,312 @@
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/coyarzun/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Tidal/ghci-tidal.conf
+tidal> import Sound.Tidal.MIDI.Context
+tidal> putStrLn =<< displayOutputDevices
+ID:	Name
+4:	Driver IAC IAC Bus 1
+5:	BR-800
+6:	Dispositivo MIDI USB Puerto 1
+7:	Dispositivo MIDI USB Puerto 2
+
+tidal> devices <- midiDevices
+tidal> 
+tidal> m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 1"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  105  midi onset:  1 onset (relative):  "-0.105" , sched:  1
+and 3 more
+
+tidal> m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> 
+tidal> late [185,11,127] midi now  4605  midi onset:  4498 onset (relative):  "-0.107" , sched:  4498
+and 3 more
+
+tidal> m3 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> 
+tidal> late [185,11,127] midi now  8980  midi onset:  8902 onset (relative):  "-0.077" , sched:  8902
+and 3 more
+
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [176,11,127] midi now  15231  midi onset:  15121 onset (relative):  "-0.109" , sched:  15121
+and 3 more
+
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 2"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> 
+tidal> late [177,11,127] midi now  20479  midi onset:  20358 onset (relative):  "-0.121" , sched:  20358
+and 3 more
+
+tidal> m6 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 2 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [177,11,127] midi now  25604  midi onset:  25540 onset (relative):  "-0.063" , sched:  25540
+and 3 more
+
+tidal> 
+tidal> m1 $ n "0*2"
+tidal> m4 $ n "0*2"
+tidal> m5 $ n "0*2"
+tidal> m6 $ n "0*2"
+tidal> m6 $ n "0*2"
+tidal> m1 $ (|-| n "24") $ n "0*2"
+tidal> m6 $ n "0*8"
+tidal> m6 $ (|-| n "12") $ n "0*8"
+tidal> m6 $ (|-| n "12") $ n "[0*8, 7*6]"
+tidal> m6 $ (|-| n "12") $ n "[0*8, 19*6]"
+tidal> m6 $ sometimes (|+| n "24") $ (|-| n "12") $ n "[0*8, 19*6]"
+tidal> m4 $ n "0 12"
+tidal> m4 $ (|-| n "12") $ n "0 12"
+tidal> m4 $ (|-| n "24") $ n "0 12"
+tidal> m5 $ (|-| n "24") $ n "0 12"
+tidal> m5 $ (|-| n "12") $ n "0 12"
+tidal> m5 $ (|-| n "12") $ n "[0 12]*2"
+tidal> m4 $ (|-| n "24") $ n "[0 12*2]*2"
+tidal> m6 $ sometimes (|+| n "24") $ (|-| n "12") $ n "[0*8, 19*6]" #dur (scale 0.1 10 rand)
+tidal> m6 $ sometimes (|+| n "24") $ (|-| n "12") $ n "[0*8, 19*6, [7 4 0 5]]" #dur (scale 0.1 10 rand)
+tidal> late [144,36,63] midi now  1535535  midi onset:  1535449 onset (relative):  "-0.029" , sched:  1535449
+and 4 more
+
+tidal> m4 $ (|-| n "25") $ n "0*2 4*2 5*2 7*2"
+tidal> m1 $ (|-| n "24") $ n "0*2 4*2 0*2 4*2"
+tidal> m2 $ (|-| n "24") $ n "6*8"
+tidal> m6 $ (|-| n "13") $ n "0*2 4*2 5*2 7*2"
+tidal> m6 $ (|-| n "13") $ n "0*2 4*2 5*2 7*2" # dur (scale 0.1 10 rand)
+tidal> m1 $ (|-| n "24") $ n "0 4 0*2 4"
+tidal> m5 silence
+tidal> m6 silence
+tidal> m6 $ slow 4 $ (|-| n "13") $ n "0*2 4*2 5*2 7*2" # dur (scale 0.1 10 rand)
+tidal> m6 $ slow 4 $ sometimes (|+| n "12") $ (|-| n "13") $ n "0*2 4*2 5*2 7*2" # dur (scale 0.1 10 rand)
+tidal> m5 $ n "7 4 5 0"
+tidal> m5 $ fast 2 $ n "7 4 5 0"
+tidal> m5 silence
+tidal> m6 silence
+tidal> m4 silence
+tidal> m3 silence
+tidal> m2 silence
+tidal> m1 silence
+tidal> m4 $ (|-| n "20") $ n "0*8"
+tidal> m4 $ (|-| n "20") $ n "0*8" #expression (scale 0.6 1.0 rand)
+tidal> m4 $ (|-| n "20") $ n "0*8" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand)
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~4]"
+tidal> m5 $ (|-| n "8") $ n "0*8" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ every 4 (rev) $ (|-| n "8") $ n "0*8" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ every 4 (slow 2) $ (|-| n "8") $ n "0*8" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "0*8" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "0*8" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 10.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "[0*8, 7]" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 10.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "[0*8, 7 5 4 0 -6]" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 10.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "[0*8, 7 5 4 0 5]" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 10.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "[7 5 4 0 5]" #expression (scale 0.6 1.0 rand) #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 10.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "[7 5 4 0 5]" #expression (scale 0.6 1.0 rand) #dur (scale 0.1 10.0 rand)
+tidal> m6 $ every 4 (slow 2) $ (|-| n "-4") $ n "[7 5 4 0 5]" #expression (scale 0.6 1.0 rand)
+tidal> m6 $ every 4 (fast 2) $ (|-| n "-4") $ n "[7 5 4 0 5]" #expression (scale 0.6 1.0 rand)
+tidal> m6 $ every 4 (rev) $ (|-| n "-4") $ n "[7 5 4 0 5]" #expression (scale 0.6 1.0 rand)
+tidal> m6 $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" #dur "[0.125, 0.625, 1]" #expressiom "[0.5,0.2,1]"
+
+<interactive>:77:70: error:
+    • Variable not in scope: expressiom :: [Char] -> ParamPattern
+    • Perhaps you meant one of these:
+        ‘expression’ (imported from Sound.Tidal.Context),
+        ‘expression_p’ (imported from Sound.Tidal.Context)
+tidal> tidal> m6 $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" #dur "[0.125, 0.625, 1]"
+
+<interactive>:78:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:78:1: error:
+    • Couldn't match expected type ‘Pattern ParamMap -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m6
+        $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" # dur "[0.125, 0.625, 1]"
+      In an equation for ‘it’:
+          it
+            = tidal > m6
+              $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" # dur "[0.125, 0.625, 1]"
+    • Relevant bindings include it :: t (bound at <interactive>:78:1)
+tidal> tidal> m6 $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" #dur "[0.125, 0.625, 1]"
+
+<interactive>:79:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:79:1: error:
+    • Couldn't match expected type ‘Pattern ParamMap -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m6
+        $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" # dur "[0.125, 0.625, 1]"
+      In an equation for ‘it’:
+          it
+            = tidal > m6
+              $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" # dur "[0.125, 0.625, 1]"
+    • Relevant bindings include it :: t (bound at <interactive>:79:1)
+tidal> m6 $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" #dur "[0.125, 0.625, 1]"
+tidal> m6 $ sometimes (|+| n "12") $ slow 2 $ n "[7 5 4 0 -5, -20*16, 28]" #dur "[0.125, 0.625, 1]"
+tidal> m6 silence
+tidal> m4 silence
+tidal> m5 silence
+tidal> m3 silence
+tidal> m2 silence
+tidal> m1 silence
+tidal> m1 $ n "0"
+tidal> m6 $ n "0*4"
+tidal> m5 $ e 5 8  $ n "0*4"
+tidal> m5 $ e 5 8  $ n "0"
+tidal> m5 $ e 5 8  $ n "12"
+tidal> m4 $ (|-| n "24") $ n "0"
+tidal> m4 $ (|-| n "24") $ n "0 12"
+tidal> m4 $ (|-| n "24") $ n "[0 12]*2"
+tidal> m4 $ (|-| n "24") $ n "[0 12*2]*2"
+tidal> m1 $ (|-|  n "24") $ n "0*2"
+tidal> m1 $ (|-|  n "24") $ n "[0*2, ~6"
+tidal> m1 $ (|-|  n "24") $ n "[0*2, ~6]"
+tidal> m1 $ (|-|  n "24") $ n "[0*2, 6*3]"
+tidal> m5 silence
+tidal> m6 silence
+tidal> m1 silence
+tidal> m4 silence
+tidal> m1 $ n "0"
+tidal> m1 $ n "[0*2, 6*8]"
+tidal> m2 $ n "[0*2, 6*8]"
+tidal> m4 $ n "[0*2, 6*8]"
+tidal> m4 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m3 $ n "4"
+tidal> m3 $ n "~4"
+tidal> m3 $ (|-| n "24") $ n "~4"
+tidal> m5 $ e 5 8 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m5 $ e 5 8 $ (|-| n "12") $ n "[0*2, 6*8]"
+tidal> m6 $ n "[7 5 4 0 -5]"
+tidal> m6 $ sometimes (fast 2) $ n "[7 5 4 0 -5]"
+tidal> m6 $ sometimes (fast 2) $ n "[7 5 4 0 -5]" #dur (scale 0.1 0.625 ran)
+
+<interactive>:118:66: error:
+    • Variable not in scope: ran :: Pattern Double
+    • Perhaps you meant one of these:
+        ‘run’ (imported from Sound.Tidal.Context),
+        ‘tan’ (imported from Prelude),
+        ‘pan’ (imported from Sound.Tidal.Context)
+tidal> m6 $ sometimes (fast 2) $ n "[7 5 4 0 -5]" #dur (scale 0.1 0.625 rand)
+tidal> m4 $ (|-| n "24") $ n "[0*2, 6*8]" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5]" #dur (scale 0.1 0.625 ran)
+
+<interactive>:121:89: error:
+    • Variable not in scope: ran :: Pattern Double
+    • Perhaps you meant one of these:
+        ‘run’ (imported from Sound.Tidal.Context),
+        ‘tan’ (imported from Prelude),
+        ‘pan’ (imported from Sound.Tidal.Context)
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5]" #dur (scale 0.1 0.625 ran)
+
+<interactive>:122:89: error:
+    • Variable not in scope: ran :: Pattern Double
+    • Perhaps you meant one of these:
+        ‘run’ (imported from Sound.Tidal.Context),
+        ‘tan’ (imported from Prelude),
+        ‘pan’ (imported from Sound.Tidal.Context)
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5]" #dur (scale 0.1 0.625 ran)
+
+<interactive>:123:89: error:
+    • Variable not in scope: ran :: Pattern Double
+    • Perhaps you meant one of these:
+        ‘run’ (imported from Sound.Tidal.Context),
+        ‘tan’ (imported from Prelude),
+        ‘pan’ (imported from Sound.Tidal.Context)
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5]" #dur (scale 0.1 0.625 rand)
+tidal> m5 $ e 5 8 $ (|-| n "12") $ n "[0*2 6*8]"
+tidal> m5 $ e 5 8 $ (|-| n "12") $ n "0"
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5, 12*8]" #dur (scale 0.1 0.625 rand)
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5, -12*8]" #dur (scale 0.1 0.625 rand)
+tidal> m6 $ every 4 (|+| n "12") $ sometimes (fast 2) $ n "[7 5 4 0 -5, -24*8]" #dur (scale 0.1 0.625 rand)
+tidal> m6 $ every 4 (|+| n "24") $ sometimes (fast 2) $ n "[7 5 4 0 -5, -24*8]" #dur (scale 0.1 0.625 rand)
+tidal> m6 $ every 4 (|+| n "24") $ sometimes (fast 2) $ n "[7 5 4 0 -5, -24*8]" #dur (scale 0.1 10.0 rand)
+tidal> m6 silence
+tidal> m4 $ (|-| n "25") $ n "[0*2, 6*8]" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "24") $ n "[0*2, 6*8]" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "25") $ n "[0*2, 6*8]" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "25") $ n "[0*8]" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "25") $ n "[0*8]" #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 1 rand)
+tidal> m4 $ (|-| n "25") $ n "[0 4 5 7]" #modwheel (scale 0.0 1.0 rand) #dur (scale 0.1 1 rand)
+tidal> m4 $ (|-| n "25") $ n "[0 4 5 7]" #modwheel (scale 0.0 0.5 rand) #dur (scale 0.1 1 rand)
+tidal> m4 $ (|-| n "25") $ n "[0 4 5 7]" #modwheel (scale 0.0 0.5 rand) #dur (scale 0.1 0.5 rand)
+tidal> m4 $ (|-| n "25") $ n "[0 4 5 7]" #modwheel (scale 0.0 0.5 rand) #dur (scale 0.1 0.25 rand)
+tidal> m6 $ n "0*8"
+tidal> m6 $ n "[0*8, 7*5]"
+tidal> m6 $ n "[0*2 4*2 5*2 7*2, 7*5]"
+tidal> m4 $ (|-| n "25") $ n "[0*2 4*2 5*2 7*2]"
+tidal> m3 silence
+tidal> m1 $ (|-| n "24") $ n "0*2 3 0*2 3"
+tidal> m1 $ (|-| n "24") $ n "0*2 3*2 0*2 3*2"
+tidal> m6 $ (|-| n "1") $ n "[0*2 4*2 5*2 7*2, 7*5]"
+tidal> m6 $ (|-| n "1") $ n "[0*2 4*2 5*2 7*2, 7*5, 24]"
+tidal> m6 $ sometimes (fast 2) $ (|-| n "1") $ n "[0*2 4*2 5*2 7*2, 7*5]"
+tidal> m1 $ (|-| n "24") $ m "6*8"
+
+<interactive>:152:21: error:
+    Variable not in scope: m :: [Char] -> ParamPattern
+tidal> m1 $ (|-| n "24") $ n "6*8"
+tidal> m4 $ (|-| n "20") $ n "[0*2]"
+tidal> m5 $ (|-| n "8") $ n "[0*2]"
+tidal> m6 $ sometimes (fast 2) $ (|-| n "1") $ n "[0*2, 4*8 5*5 7*3, 7*5]"
+tidal> m6 $ sometimes (fast 2) $ (|-| n "1") $ n "[0*2 4*2 5*2 7*2, 7*5]"
+tidal> m6 $ sometimes (fast 2) $ (|-| n "1") $ n "[0*2, 4*8 5*5 7*3, 7*5]"
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|-| n "1") $ n "[0*2, 4*8 5*5 7*3, 7*5]"
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|-| n "1") $ n "[0*2, 4*8 5*5 7*3, 7*5]" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|-| n "1") $ n "[0*2, 4*8,5*5 ,7*3,]" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|-| n "1") $ n "[0*2, 4*8,5*5 ,7*3]" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|-| n "8") $ n "[0*2, 4*8,5*5 ,7*3]" #dur (scale 0.1 20 rand)
+tidal> m4 $ (|-| n "20") $ n "[0*2]"
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|+| n "4") $ n "[0*2, 4*8,5*5 ,7*3]" #dur (scale 0.1 20 rand)
+tidal> m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+tidal> m6 silence
+tidal> m6 silence
+tidal> m1 $ (|-| n "24") $ n "[0 4 0*2 4]"
+tidal> m6 $ sometimes (fast 2) $ every 2 (|+| n "12") $ (|+| n "4") $ n "[0*2 ,7*5]" #dur (scale 0.1 20 rand)
+tidal> m5 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+tidal> m5 $ e 5 8 $ n "4"
+tidal> m5 $ e 5 8 $ n "4 11"
+tidal> m5 $ e 5 8 $ n "4 11 9"
+tidal> m4 $ (|-| n "20") $ n "0*8"
+tidal> m6 $ n "[4*8, -8*8]"
+tidal> m6 $ n "[4*8, -8*8, 16*4]"
+tidal> m6 $ n "[4*8, -8*8, 16*4, -20*4]"
+tidal> m6 $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 5 rand)
+tidal> m6 $ sometimes (fast 2) $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 5 rand)
+tidal> m6 $ sometimes (|+| n "24") $ sometimes (fast 2) $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 5 rand)
+tidal> m6 $ sometimes (|+| n "24") $ sometimes (fast 2) $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 10 rand)
+tidal> m5 $ sometimes (|+| n "12") $ sometimes (fast 2) $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 10 rand)
+tidal> m5 $ sometimes (|+| n "12") $ sometimes (fast 2) $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 0.125 rand)
+tidal> m5 $ sometimes (|+| n "-12") $ sometimes (fast 2) $ n "[4*8, -8*8, 16*4, -20*4]" #dur (scale 0.1 0.125 rand)
+tidal> m1 $ (|-| n "24") $ n "[0 3 0*2 4]"
+tidal> 
+tidal> 
+tidal> m1 $ (|-| n "24") $ n "[0 3 0*2 3]"
+tidal> m2 silence
+tidal> m2 $ e 5 8 $ (|-| n "24") $ n "0"
+tidal> m3 $ (|-| n "24") $ n "6"
+tidal> m3 $ (|-| n "0") $ n "6"
+tidal> m3 $ e 3 8 $ (|-| n "0") $ n "6"
+tidal> m1 silence
+tidal> m5 silence
+tidal> m2 silence
+tidal> m4 silence
+tidal> m2 $ e 5 8 $ (|-| n "24") $ n "0"
+tidal> m1 $ (|-| n "24") $ n "[0 3 0*2 4]"
+tidal> m4 $ (|-| n "20") $ n "0*8"
+tidal> m1 silence
+tidal> m2 silence
+tidal> m4 silence
+tidal> m6 silence
+tidal> m3 silence
+tidal> 

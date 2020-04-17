@@ -1,0 +1,293 @@
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/coyarzun/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Tidal/ghci-tidal.conf
+tidal> import Sound.Tidal.MIDI.Context
+tidal> devices <- midiDevices
+tidal> m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 1"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  47  midi onset:  1 onset (relative):  "-0.046" , sched:  1
+and 3 more
+m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  917  midi onset:  867 onset (relative):  "-0.050" , sched:  867
+and 3 more
+
+tidal> m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  4421  midi onset:  4388 onset (relative):  "-0.033" , sched:  4388
+and 3 more
+
+tidal> m3 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  7419  midi onset:  7315 onset (relative):  "-0.104" , sched:  7315
+and 3 more
+
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [176,11,127] midi now  11422  midi onset:  11310 onset (relative):  "-0.112" , sched:  11310
+and 3 more
+
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 2"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> late [177,11,127] midi now  16796  midi onset:  16708 onset (relative):  "-0.087" , sched:  16708
+and 3 more
+
+tidal> m6 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 2 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [177,11,127] midi now  21047  midi onset:  20962 onset (relative):  "-0.085" , sched:  20962
+and 3 more
+
+tidal> m1 $ n "0*2"
+tidal> m1 $ (|-| n "24") $ n "0*2, 6*8, ~4"
+tidal> m4 $ (|-| n "24") $ n "0*8"
+tidal> m5 $ e 5 8 $ (|-| n "12") $ n "0*8"
+tidal> m6 $ (|+| n "12") $ n "[0, 7]*8"
+tidal> m6 $ (|+| n "12") $ n "[0, 7]*8" #dur (scale 0.1 10 rand)
+tidal> m1 $ (|-| n "24") $ n "0*2, 6*8, ~3"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~3]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~4]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~3]"
+tidal> m6 silence
+tidal> m5 silemce
+
+<interactive>:27:4: error:
+    • Variable not in scope: silemce :: ParamPattern
+    • Perhaps you meant ‘silence’ (imported from Sound.Tidal.Context)
+tidal> m5 silence
+tidal> m4 silence
+tidal> m1 silence
+tidal> m1 $ n "0"
+tidal> m1 $ n "0*2"
+tidal> m1 $ n "[0*2, 6*8]"
+tidal> m1 $ n "[0*2, 6*8, ~3]"
+tidal> m1 $ sometimes (|-| n "24")$ n "[0*2, 6*8, ~3]"
+tidal> m2 $ (|-| n 24) $ n "0*2"
+tidal> m3 $ (|-| n 24) $ n "[6*8, ~3]"
+tidal> m4 $ n "0"
+tidal> m4 $ (|-| n "24") $ n "0"
+tidal> m4 $ (|-| n "24") $ n "0*8"
+tidal> m4 $ (|-| n "25") $ n "0*8"
+tidal> m4 $ (|-| n "25") $ sometimes (|+| n 1) $ n "0*8"
+tidal> m5 $ (|-| n "13") $ sometimes (|+| n 1) $ n "0*8"
+tidal> m5 $ sometimes (fast 2) $ (|-| n "13") $ sometimes (|+| n 1) $ n "0*8"
+tidal> m5 $ sometimes (fast 2) $ (|-| n "13") $ every 2  (|+| n 1) $ n "0*8"
+tidal> m4 $ (|-| n "25") $ every 2 (|+| n 1) $ n "0*8"
+tidal> m6 $ sometimes (fast 2) $ (|-| n "13") $ every 2  (|+| n 1) $ n "0*8"
+tidal> m6 $ sometimes (fast 2) $ (|+| n "11") $ every 2  (|+| n 1) $ n "0*8"
+tidal> m6 $ sometimes (fast 2) $ (|+| n "11") $ every 2  (|+| n 1) $ n "[0, 7]*8"
+tidal> m6 $ sometimes (fast 2) $ (|+| n "11") $ every 2  (|+| n 1) $ n "[0, 7]*8" #dur (scale 0.1 10 rand)
+tidal> m5 $ e 5 8 $ sometimes (fast 2) $ (|-| n "13") $ every 2  (|+| n 1) $ n "0*8"
+tidal> m6 $ sometimes (fast 2) $ (|+| n "11") $ every 2  (|+| n 1) $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (fast 2) $ (|+| n "23") $ every 2  (|+| n 1) $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ every 2 (fast 2) $ (|+| n "23") $ every 2  (|+| n 1) $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m2 silence
+tidal> m2 $ (|-| n 24) $ n "0*2"
+tidal> m6 $ sometimes (fast 2) $ (|+| n "23") $ every 2  (|+| n 1) $ n "[0, 7]*8" #dur (scale 0.1 2 rand)
+tidal> m4 $ (|-| n "25") $ every 2 (|+| n 1) $ n "0*8" #dur (scale 0.1 0.5)
+
+<interactive>:58:55: error:
+    • Couldn't match expected type ‘Pattern Double’
+                  with actual type ‘f0 Double -> f0 Double’
+    • Probable cause: ‘scale’ is applied to too few arguments
+      In the first argument of ‘dur’, namely ‘(scale 0.1 0.5)’
+      In the second argument of ‘(#)’, namely ‘dur (scale 0.1 0.5)’
+      In the second argument of ‘($)’, namely
+        ‘n "0*8" # dur (scale 0.1 0.5)’
+tidal> m4 $ (|-| n "25") $ every 2 (|+| n 1) $ n "0*8" #dur (scale 0.1 0.5 rand)
+tidal> m4 $ (|-| n "25") $ every 2 (|+| n 1) $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 silemce
+
+<interactive>:61:4: error:
+    • Variable not in scope: silemce :: ParamPattern
+    • Perhaps you meant ‘silence’ (imported from Sound.Tidal.Context)
+tidal> m6 silence
+tidal> m6 $ e 5 8 $ n "4"
+tidal> m5 $ (|-| n "12")   $ e 5 8 $ n "4"
+tidal> m4 $ (|-| n "24") $ every 2 (|+| n 1) $ n "4*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "24") $ n "4*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ e 5 8 $ n "4" #dur (scale 0.1 20 rand)
+tidal> m6 $ e 5 8 $ n "[4, 11]" #dur (scale 0.1 20 rand)
+tidal> m6 $  n "[4, 11]" #dur (scale 0.1 20 rand)
+tidal> m4 $ (|-| n "24") $ every 2 (|+| n 1) $ n "[4 16]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "24") $ every 2 (|+| n 1) $ n "[4 16*2]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "24") $ n "[4 16*2]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $  n "[4, 11]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (|-| n 12) $  n "[4, 11]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (|-| n 12) $ every 4 (fast 2) $  n "[4, 11]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ sometimes (|-| n 12) $ every 4 (fast 2) $  n "[0 4 5 7]"
+tidal> m2 $ sometimes (|+| n 12) $ every 4 (fast 2) $  n "[0 4 5 7]"
+tidal> m2 $ (|-| n 24) $ n "0*2"
+tidal> m5 $ sometimes (|+| n 12) $ every 4 (fast 2) $  n "[0 4 5 7]"
+tidal> m6 $ sometimes (|-| n 12) $ every 4 (fast 2) $  n "[0 4 5 7]" #dur(scale 0.1 20 rand)
+tidal> m4 $ (|-| n "24") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ (|-| n "12") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ e 5 8 $ (|-| n "12") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 silence
+tidal> m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+tidal> m5 $ (|-| n "12") $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+tidal> m4 $ (|-| n "24") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5$ (|-| n "24") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5$ (|-| n "212") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5$ (|-| n "12") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ e 5 8 $ (|-| n "12") $ n "[4]*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ e 5 8 $ (|-| n "12") $ n "7 5 4 0"
+tidal> m6 $ e 5 8 $ (|-| n "12") $ n "[7 5 4 0, 7*8]"
+tidal> m6 $ e 5 8 $ sometimes (|-| n "12") $ n "[7 5 4 0, 7*8]"
+tidal> m6 $ e 5 8 $ sometimes (|+| n "12") $ n "[7 5 4 0, 7*8]"
+tidal> m6 $ e 5 8 $ sometimes (|+| n "24") $ n "[7 5 4 0, 7*8]"
+tidal> m6 $ e 5 8 $ sometimes (|+| n "24") $ n "[7 5 4 0, 7*8]" #dur(scale 0.1 10 rand)
+tidal> m5 $ e 5 8 $ sometimes (|-| n "12") $ n "[7 5 4 0, 7*8]" #dur(scale 0.1 10 rand)
+tidal> m5 $ e 5 8 $ sometimes (|-| n "12") $ n "[0, 7*8]" #dur(scale 0.1 10 rand)
+tidal> m5 $ e 5 8 $ sometimes (|-| n "12") $ n "[7 5 4 0, 7*8]" #dur(scale 0.1 2 rand)
+tidal> m6 $ (|-| n "1") $ n "[0, 7]*8"
+tidal> m5 $ (|-| n "1") $ n "[0, 7]*8"
+tidal> m6 $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8"
+tidal> m6 $ every 2 (fast 2) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" 
+tidal> m6 $ every 2 (fast 2) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 10 rand)
+tidal> m6 $ every 2 (fast 2) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ every 2 (fast 2) $ sometimes (|+| n 12) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6 $ every 2 (fast 2) $ sometimes (|+| n 12) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8"
+tidal> m2 silence
+tidal> m5 silence
+tidal> m2 $ (|-| n 24) $ n "[0*2, 6*8, ~4]"
+tidal> m2 $ (|-| n 24) $ n "[0*2, 6*8, ~3]"
+tidal> m4 $ (|-| n "24") $ n "[4 16 4 16]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "24") $ n "[4 16*2 4 16]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ sometimes (|+| n 12) $ (|-| n "24") $ n "[4 16*2 4 16]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ sometimes (|+| n 24) $ (|-| n "12") $ n "[4 16]*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ sometimes (|+| n 24) $ (|-| n "12") $ n "[4 16]*2"
+tidal> m6 $ every 2 (fast 2) $ sometimes (|+| n 12) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6  $ sometimes (|+| n 12) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6  $ sometimes (|-| n 12) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m6  $ sometimes (|-| n 12) $ (|-| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m2 silence
+tidal> m6  $ sometimes (|+| n 24) $ (|+| n "12") $ (|-| n "1") $ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m5 silence
+tidal> m3 silence
+tidal> m3 $ (|-| n "24") $ n "[0*2, 6*8, ~4]"
+tidal> late [176,1,38] midi now  15357363  midi onset:  15356640 onset (relative):  "-4200.235" , sched:  15356640
+and 165 more
+late [153,42,63] midi now  15357371  midi onset:  15356640 onset (relative):  "-4200.l2a4t3e"  [,1 5s3c,h4e2d,:6 3 ]1 5m3i5d6i6 4n0o
+w a n1d5 31537 3m7o5r e 
+midi onset:  15356640 onset (relative):  "-4200.246" , sched:  15356640
+and 5 more
+late [153,36,63] midi now  15381038  midi onset:  19570765 onset (relative):  "-21273.777" , sched:  19570765
+and 7 more
+late [153,36,63] midi now  15381097  midi onset:  19570765 onset (relative):  "-21273.830" , sched:  19570765
+and 5 more
+late [153,42,63] midi now  15381110  midi onset:  19570765 onset (relative):  "-21273.843" , sched:  19570765
+and 176 more
+late [145,95,63] midi now  15381169  midi onset:  40844640 onset (relative):  "-0.027" , sched:  40844640
+and 3 more
+late [153,36,63] midi now  15381302  midi onset:  40844765 onset (relative):  "-0.035" , sched:  40844765
+and 7 more
+late [176,1,59] midi now  15381432  midi onset:  40844890 onset (relative):  "-0.039" , sched:  40844890
+and 4 more
+late [176,1,111] midi now  15381548  midi onset:  40845015 onset (relative):  "-0.031" , sched:  40845015
+and 4 more
+late [176,1,40] midi now  15381669  midi onset:  40845140 onset (relative):  "-0.027" , sched:  40845140
+and 5 more
+late [153,36,63] midi now  15381794  midi onset:  40845265 onset (relative):  "-0.027" , sched:  40845265
+and 7 more
+late [153,42,63] midi now  15381922  midi onset:  40845390 onset (relative):  "-0.030" , sched:  40845390
+and 4 more
+late [145,95,63] midi now  15382048  midi onset:  40845515 onset (relative):  "-0.031" , sched:  40845515
+and 4 more
+late [176,1,111] midi now  15382168  midi onset:  40845640 onset (relative):  "-0.026" , sched:  40845640
+and 3 more
+late [176,1,11] midi now  15382299  midi onset:  40845765 onset (relative):  "-0.032" , sched:  40845765
+and 7 more
+late [153,42,63] midi now  15382425  midi onset:  40845890 onset (relative):  "-0.033" , sched:  40845890
+and 3 more
+late [153,42,63] midi now  15382545  midi onset:  40846015 onset (relative):  "-0.028" , sched:  40846015
+and 4 more
+late [153,42,63] midi now  15382673  midi onset:  40846140 onset (relative):  "-0.031" , sched:  40846140
+and 4 more
+late [153,36,63] midi now  15382795  midi onset:  40846265 onset (relative):  "-0.028" , sched:  40846265
+and 6 more
+late [176,1,119] midi now  15382921  midi onset:  40846390 onset (relative):  "-0.029" , sched:  40846390
+and 5 more
+late [153,66,63] midi now  15383046  midi onset:  40846515 onset (relative):  "-0.028" , sched:  40846515
+and 4 more
+late [176,1,17] midi now  15383170  midi onset:  40846640 onset (relative):  "-0.028" , sched:  40846640
+and 4 more
+late [176,1,119] midi now  15383294  midi onset:  40846765 onset (relative):  "-0.027" , sched:  40846765
+and 5 more
+late [176,1,67] midi now  15383423  midi onset:  40846890 onset (relative):  "-0.031" , sched:  40846890
+and 5 more
+late [153,66,63] midi now  15383544  midi onset:  40847015 onset (relative):  "-0.026" , sched:  40847015
+and 3 more
+late [153,42,63] midi now  15383669  midi onset:  40847140 onset (relative):  "-0.027" , sched:  40847140
+and 3 more
+late [153,36,63] midi now  15383797  midi onset:  40847265 onset (relative):  "-0.030" , sched:  40847265
+and 9 more
+late [176,1,43] midi now  15383922  midi onset:  40847390 onset (relative):  "-0.030" , sched:  40847390
+and 5 more
+late [145,71,63] midi now  15384044  midi onset:  40847515 onset (relative):  "-0.027" , sched:  40847515
+and 3 more
+late [153,42,63] midi now  15384171  midi onset:  40847640 onset (relative):  "-0.029" , sched:  40847640
+and 3 more
+late [153,60,63] midi now  15384296  midi onset:  40847765 onset (relative):  "-0.029" , sched:  40847765
+and 7 more
+late [153,42,63] midi now  15384419  midi onset:  40847890 onset (relative):  "-0.026" , sched:  40847890
+and 4 more
+late [153,42,63] midi now  15384545  midi onset:  40848015 onset (relative):  "-0.028" , sched:  40848015
+and 5 more
+late [176,1,3] midi now  15384669  midi onset:  40848140 onset (relative):  "-0.027" , sched:  40848140
+and 4 more
+late [153,60,63] midi now  15384793  midi onset:  40848265 onset (relative):  "-0.026" , sched:  40848265
+and 7 more
+late [145,95,63] midi now  15384921  midi onset:  40848390 onset (relative):  "-0.029" , sched:  40848390
+and 5 more
+late [153,42,63] midi now  15385048  midi onset:  40848515 onset (relative):  "-0.031" , sched:  40848515
+and 5 more
+late [153,42,63] midi now  15385169  midi onset:  40848640 onset (relative):  "-0.027" , sched:  40848640
+and 4 more
+late [176,1,74] midi now  15385297  midi onset:  40848765 onset (relative):  "-0.029" , sched:  40848765
+and 5 more
+late [145,71,63] midi now  15385418  midi onset:  40848890 onset (relative):  "-0.026" , sched:  40848890
+and 3 more
+late [145,71,63] midi now  15385545  midi onset:  40849015 onset (relative):  "-0.028" , sched:  40849015
+and 5 more
+late [153,42,63] midi now  15385669  midi onset:  40849140 onset (relative):  "-0.026" , sched:  40849140
+and 4 more
+late [176,1,124] midi now  15385797  midi onset:  40849265 onset (relative):  "-0.029" , sched:  40849265
+and 6 more
+late [176,1,102] midi now  15385919  midi onset:  40849390 onset (relative):  "-0.027" , sched:  40849390
+and 5 more
+late [153,42,63] midi now  15386045  midi onset:  40849515 onset (relative):  "-0.027" , sched:  40849515
+and 4 more
+late [153,42,63] midi now  15386169  midi onset:  40849640 onset (relative):  "-0.027" , sched:  40849640
+and 5 more
+late [153,36,63] midi now  15386294  midi onset:  40849765 onset (relative):  "-0.026" , sched:  40849765
+and 7 more
+late [153,42,63] midi now  15386422  midi onset:  40849890 onset (relative):  "-0.029" , sched:  40849890
+and 5 more
+late [153,42,63] midi now  15386544  midi onset:  40850015 onset (relative):  "-0.027" , sched:  40850015
+and 4 more
+late [153,42,63] midi now  15386669  midi onset:  40850140 onset (relative):  "-0.026" , sched:  40850140
+and 5 more
+late [176,1,104] midi now  15386794  midi onset:  40850265 onset (relative):  "-1.316" , sched:  40850265
+and 14 more
+late [176,1,7] midi now  15386799  midi onset:  40850390 onset (relative):  "-1.196" , sched:  40850390
+and 8 more
+late [153,42,63] midi now  15386806  midi onset:  40850390 onset (relative):  "-1.203" , sched:  40850390
+and 7 more
+late [153,42,63] midi now  15386883  midi onset:  40850390 onset (relative):  "-1.280" , sched:  40850390
+and 17 more
+late [153,36,63] midi now  15387009  midi onset:  40851765 onset (relative):  "-0.031" , sched:  40851765
+and 7 more
+late [153,66,63] midi now  15387131  midi onset:  40851890 onset (relative):  "-0.028" , sched:  40851890
+and 3 more
+late [153,42,63] midi now  15387256  midi onset:  40852015 onset (relative):  "-0.027" , sched:  40852015
+and 4 more
+late [145,95,63] midi now  15387379  midi onset:  40852140 onset (relative):  "-0.026" , sched:  40852140
+and 4 more
+late [153,36,63] midi now  15387508  midi onset:  40852265 onset (relative):  "-0.030" , sched:  40852265
+and 9 more

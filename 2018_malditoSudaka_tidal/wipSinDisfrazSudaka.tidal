@@ -1,0 +1,556 @@
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/coyarzun/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Tidal/ghci-tidal.conf
+tidal> import Sound.Tidal.MIDI.Context
+tidal> devices <- midiDevices
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 1"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [176,11,127] midi now  107  midi onset:  0 onset (relative):  "-0.106" , sched:  0
+and 3 more
+
+tidal> m4 $ n "0 0 7 7 5 5 10 10 12"
+tidal> m4 $ (|-| n "24") $ n "0 0 7 7 5 5 10 10 12" 
+tidal> m4 $ (|-| n "24") $ n "0 0 7 7 7 5 5 10 10 12"		
+
+<interactive>:7:47: warning: [-Wtabs]
+    Tab character found here, and in one further location.
+    Please use spaces instead.
+tidal> m4 $ (|-| n "24") $ n "0 0 7 7 7 5 5 10 10 12"
+tidal> m4 $ (|-| n "24") $ n "[0 0 7 7 7 5 5 10 10 12]"
+tidal> m4 $ (|-| n "24") $ n "[0 0 7 ~ 7 7 5 5 10 10 12]"
+tidal> m4 $ (|-| n "24") $ n "[[0 0 7] [~ 7 7 5 5 10 10 12]"
+tidal> m4 $ (|-| n "24") $ n "[[0 0 7] [~ 7 7 5 5 10 10 12]]"
+tidal> m4 $ (|-| n "24") $ n "[[0 [0 7] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]"
+tidal> m4 $ (|-| n "24") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]"
+tidal> m4 $ slow 2 $ (|-| n "24") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]" 
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 2"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> late [177,11,127] midi now  567996  midi onset:  567900 onset (relative):  "-0.097" , sched:  567900
+and 3 more
+
+tidal> m5 $ (|-| n "24") $ n "[0 0 7 7 7 5 5 10 10 12]"
+tidal> m5 $ (|-| n "24") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 2 $ (|-| n "24") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 2 $ (|-| n "12") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "12") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "0") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "-12") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m4 $ slow 2 $ (|-| n "24") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]" 
+tidal> m4 $ slow 2 $ (|-| n "24") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> m4 $ slow 4 $ (|-| n "24") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  780877  midi onset:  780841 onset (relative):  "-0.014" , sched:  780841
+and 3 more
+
+tidal> m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  788755  midi onset:  788618 onset (relative):  "-0.115" , sched:  788618
+and 3 more
+
+tidal> m1 $ midinote "[36 38 [36 36] 38]/2"
+tidal> m2 $ midinote "42*8"
+tidal> m4 $ slow 4 $ (|-| n "(24+2)") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> m4 $ slow 4 $ (|-| n "26") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> m4 $ slow 4 $ (|-| n "26") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> 
+tidal> 
+tidal> 
+tidal> m4 $ slow 4 $ (|-| n "22") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> m5 $ slow 1.5 $ (|-| n "-10") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m4 $ slow 4 $ (|-| n "20") $ every 2 (|+| n "2") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]*2"
+tidal> m5 $ slow 1.5 $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]*2"
+tidal> m5 $ slow 1.5 $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]*1.5"
+tidal> m5 $ slow 1.5 $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ every 4 (reverse) $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+
+<interactive>:48:26: error:
+    • Couldn't match type ‘[a0]’ with ‘Pattern ParamMap’
+      Expected type: Pattern ParamMap -> Pattern ParamMap
+        Actual type: [a0] -> [a0]
+    • In the second argument of ‘every’, namely ‘(reverse)’
+      In the expression: every 4 (reverse)
+      In the second argument of ‘($)’, namely
+        ‘every 4 (reverse)
+         $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"’
+tidal> m5 $ slow 1.5 $ every 4 (rev) $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ every 4 (rev) $ (|-| n "-8") $ n "[0 0 7 ~ 7 7 5 5]"
+tidal> m5 $ slow 1.5 $ every 4 (rev) $ (|-| n "-8") $ n "[0 0 4 4 5 5 7 7]"
+tidal> m5 $ slow 1.0 $ every 4 (rev) $ (|-| n "-8") $ n "[0 0 4 4 5 5 7 7]"
+tidal> m5 $ slow 1.0 $ e 5 8 $ every 4 (rev) $ (|-| n "-8") $ n "[0 0 4 4 5 5 7 7]"
+tidal> m5 silence
+tidal> m4 silence
+tidal> m3 silence
+
+<interactive>:56:1: error:
+    • Variable not in scope: m3 :: Pattern a0 -> t
+    • Perhaps you meant one of these:
+        ‘m1’ (line 29), ‘m2’ (line 31), ‘m4’ (line 3)
+tidal> m2 silence
+tidal> m1 silence
+tidal> m4 $ n "0*8"
+tidal> m4 $ n "0"
+tidal> m4 $ n "0 12"
+tidal> m4 $ n "0 12*2"
+tidal> m4 $ n "0 12*4"
+tidal> m4 $ n "0 12*2"
+tidal> m4 $ (|-| 24) $ n "0 12*2"
+
+<interactive>:65:11: error:
+    • No instance for (Num
+                         (containers-0.5.7.1:Data.Map.Base.Map Param Value))
+        arising from the literal ‘24’
+    • In the second argument of ‘(|-|)’, namely ‘24’
+      In the expression: (|-| 24)
+      In the second argument of ‘($)’, namely ‘(|-| 24) $ n "0 12*2"’
+tidal> 
+tidal> m4 $ (|-| n "24") $ n "0 12*2"
+tidal> m4 $ (|-| n "24") $ n "[0 12*2]*2"
+tidal> m4 $ (|-| n "24") $ n "[0*2 12*2]*2"
+tidal> m4 $ (|-| n "24") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 2 (|+| n "2") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 2 (|+| n "2") $ every 4 (|+| n "5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 8 (|+| n "2") $ every 4 (|+| n "5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 4 (|+| n "2") $ every 8 (|+| n "5") $ n "[0*1 12*2]*2"
+tidal> m1 $ n "0*2"
+tidal> m1 $ (|-| n "24") $ n "0*2"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~1]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~1]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~2]"
+tidal> m4 $ (|-| n "22") $ every 3 (|+| n "2") $ every 8 (|+| n "5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 3 (|+| n "4") $ every 8 (|+| n "7") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 3 (|+| n "4") $ every 8 (|+| n "-5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 3 (|+| n "4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 3 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2"
+tidal> m4 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.5 1.0 rand)
+tidal> m4 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.5 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m4 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> 
+tidal> m5 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:91:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:91:1: error:
+    • Couldn't match expected type ‘ParamPattern -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m5
+        $ (|-| n "22")
+          $ every 4 (|+| n "-4")
+            $ every 5 (|+| n "-5")
+              $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = tidal > m5
+              $ (|-| n "22")
+                $ every 4 (|+| n "-4")
+                  $ every 5 (|+| n "-5")
+                    $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                      # dur (scale 0.2 1.0 rand)
+    • Relevant bindings include it :: t (bound at <interactive>:91:1)
+tidal> 
+tidal> m5 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:92:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:92:1: error:
+    • Couldn't match expected type ‘ParamPattern -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m5
+        $ (|-| n "22")
+          $ every 4 (|+| n "-4")
+            $ every 5 (|+| n "-5")
+              $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = tidal > m5
+              $ (|-| n "22")
+                $ every 4 (|+| n "-4")
+                  $ every 5 (|+| n "-5")
+                    $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                      # dur (scale 0.2 1.0 rand)
+    • Relevant bindings include it :: t (bound at <interactive>:92:1)
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> late [177,11,127] midi now  8058274  midi onset:  8057962 onset (relative):  "-0.036" , sched:  8057962
+and 3 more
+
+tidal> 
+tidal> m5 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:95:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:95:1: error:
+    • Couldn't match expected type ‘ParamPattern -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m5
+        $ (|-| n "22")
+          $ every 4 (|+| n "-4")
+            $ every 5 (|+| n "-5")
+              $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = tidal > m5
+              $ (|-| n "22")
+                $ every 4 (|+| n "-4")
+                  $ every 5 (|+| n "-5")
+                    $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                      # dur (scale 0.2 1.0 rand)
+    • Relevant bindings include it :: t (bound at <interactive>:95:1)
+tidal> 
+tidal> m5 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:96:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:96:1: error:
+    • Couldn't match expected type ‘ParamPattern -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m5
+        $ (|-| n "22")
+          $ every 4 (|+| n "-4")
+            $ every 5 (|+| n "-5")
+              $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = tidal > m5
+              $ (|-| n "22")
+                $ every 4 (|+| n "-4")
+                  $ every 5 (|+| n "-5")
+                    $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                      # dur (scale 0.2 1.0 rand)
+    • Relevant bindings include it :: t (bound at <interactive>:96:1)
+tidal> 
+tidal>m5 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:97:1: error:
+    Variable not in scope: tidal :: ParamPattern -> IO ()
+
+<interactive>:97:1: error:
+    • Couldn't match expected type ‘ParamPattern -> t’
+                  with actual type ‘Bool’
+    • The first argument of ($) takes one argument,
+      but its type ‘Bool’ has none
+      In the expression:
+        tidal > m5
+        $ (|-| n "22")
+          $ every 4 (|+| n "-4")
+            $ every 5 (|+| n "-5")
+              $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = tidal > m5
+              $ (|-| n "22")
+                $ every 4 (|+| n "-4")
+                  $ every 5 (|+| n "-5")
+                    $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                      # dur (scale 0.2 1.0 rand)
+    • Relevant bindings include it :: t (bound at <interactive>:97:1)
+tidal> m5 $ (|-| n "22") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m5 $ reverse $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:101:6: error:
+    • Couldn't match type ‘[a0]’ with ‘Pattern ParamMap’
+      Expected type: ParamPattern
+        Actual type: [a0]
+    • In the second argument of ‘($)’, namely
+        ‘reverse
+         $ (|-| n "-2")
+           $ every 4 (|+| n "-4")
+             $ every 5 (|+| n "-5")
+               $ e 5 8
+                 $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                   # dur (scale 0.2 1.0 rand)’
+      In the expression:
+        m5
+        $ reverse
+          $ (|-| n "-2")
+            $ every 4 (|+| n "-4")
+              $ every 5 (|+| n "-5")
+                $ e 5 8
+                  $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                    # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = m5
+              $ reverse
+                $ (|-| n "-2")
+                  $ every 4 (|+| n "-4")
+                    $ every 5 (|+| n "-5")
+                      $ e 5 8
+                        $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                          # dur (scale 0.2 1.0 rand)
+
+<interactive>:101:16: error:
+    • Couldn't match type ‘Pattern ParamMap’ with ‘[a0]’
+      Expected type: [a0]
+        Actual type: ParamPattern
+    • In the second argument of ‘($)’, namely
+        ‘(|-| n "-2")
+         $ every 4 (|+| n "-4")
+           $ every 5 (|+| n "-5")
+             $ e 5 8
+               $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                 # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘reverse
+         $ (|-| n "-2")
+           $ every 4 (|+| n "-4")
+             $ every 5 (|+| n "-5")
+               $ e 5 8
+                 $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                   # dur (scale 0.2 1.0 rand)’
+      In the expression:
+        m5
+        $ reverse
+          $ (|-| n "-2")
+            $ every 4 (|+| n "-4")
+              $ every 5 (|+| n "-5")
+                $ e 5 8
+                  $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                    # dur (scale 0.2 1.0 rand)
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ reverse $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:102:75: error:
+    • Couldn't match expected type ‘Pattern ParamMap’
+                  with actual type ‘[a0]’
+    • In the second argument of ‘($)’, namely
+        ‘reverse
+         $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+           # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘e 5 8
+         $ reverse
+           $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+             # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘every 5 (|+| n "-5")
+         $ e 5 8
+           $ reverse
+             $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+               # dur (scale 0.2 1.0 rand)’
+
+<interactive>:102:85: error:
+    • Couldn't match type ‘Pattern ParamMap’ with ‘[a0]’
+      Expected type: [a0]
+        Actual type: ParamPattern
+    • In the second argument of ‘($)’, namely
+        ‘n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+         # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘reverse
+         $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+           # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘e 5 8
+         $ reverse
+           $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+             # dur (scale 0.2 1.0 rand)’
+tidal> m5 silence
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ reverse $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:104:75: error:
+    • Couldn't match expected type ‘Pattern ParamMap’
+                  with actual type ‘[a0]’
+    • In the second argument of ‘($)’, namely
+        ‘reverse
+         $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+           # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘e 5 8
+         $ reverse
+           $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+             # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘every 5 (|+| n "-5")
+         $ e 5 8
+           $ reverse
+             $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+               # dur (scale 0.2 1.0 rand)’
+
+<interactive>:104:85: error:
+    • Couldn't match type ‘Pattern ParamMap’ with ‘[a0]’
+      Expected type: [a0]
+        Actual type: ParamPattern
+    • In the second argument of ‘($)’, namely
+        ‘n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+         # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘reverse
+         $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+           # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘e 5 8
+         $ reverse
+           $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+             # dur (scale 0.2 1.0 rand)’
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ reverse $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:105:75: error:
+    • Couldn't match expected type ‘Pattern ParamMap’
+                  with actual type ‘[a0]’
+    • In the second argument of ‘($)’, namely
+        ‘reverse
+         $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+           # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘e 5 8
+         $ reverse
+           $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+             # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘every 5 (|+| n "-5")
+         $ e 5 8
+           $ reverse
+             $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+               # dur (scale 0.2 1.0 rand)’
+
+<interactive>:105:85: error:
+    • Couldn't match type ‘Pattern ParamMap’ with ‘[a0]’
+      Expected type: [a0]
+        Actual type: ParamPattern
+    • In the second argument of ‘($)’, namely
+        ‘n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+         # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘reverse
+         $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+           # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘e 5 8
+         $ reverse
+           $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+             # dur (scale 0.2 1.0 rand)’
+tidal> m5 $ reverse $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+
+<interactive>:106:6: error:
+    • Couldn't match type ‘[a0]’ with ‘Pattern ParamMap’
+      Expected type: ParamPattern
+        Actual type: [a0]
+    • In the second argument of ‘($)’, namely
+        ‘reverse
+         $ (|-| n "-2")
+           $ every 4 (|+| n "-4")
+             $ every 5 (|+| n "-5")
+               $ e 5 8
+                 $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                   # dur (scale 0.2 1.0 rand)’
+      In the expression:
+        m5
+        $ reverse
+          $ (|-| n "-2")
+            $ every 4 (|+| n "-4")
+              $ every 5 (|+| n "-5")
+                $ e 5 8
+                  $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                    # dur (scale 0.2 1.0 rand)
+      In an equation for ‘it’:
+          it
+            = m5
+              $ reverse
+                $ (|-| n "-2")
+                  $ every 4 (|+| n "-4")
+                    $ every 5 (|+| n "-5")
+                      $ e 5 8
+                        $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                          # dur (scale 0.2 1.0 rand)
+
+<interactive>:106:16: error:
+    • Couldn't match type ‘Pattern ParamMap’ with ‘[a0]’
+      Expected type: [a0]
+        Actual type: ParamPattern
+    • In the second argument of ‘($)’, namely
+        ‘(|-| n "-2")
+         $ every 4 (|+| n "-4")
+           $ every 5 (|+| n "-5")
+             $ e 5 8
+               $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                 # dur (scale 0.2 1.0 rand)’
+      In the second argument of ‘($)’, namely
+        ‘reverse
+         $ (|-| n "-2")
+           $ every 4 (|+| n "-4")
+             $ every 5 (|+| n "-5")
+               $ e 5 8
+                 $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                   # dur (scale 0.2 1.0 rand)’
+      In the expression:
+        m5
+        $ reverse
+          $ (|-| n "-2")
+            $ every 4 (|+| n "-4")
+              $ every 5 (|+| n "-5")
+                $ e 5 8
+                  $ n "[0*1 12*2]*2" # expression (scale 0.8 1.0 rand)
+                    # dur (scale 0.2 1.0 rand)
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.2 2.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m5 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m5 $ slow 2 $ (|-| n "-2") $ every 4 (|+| n "-4") $ every 5 (|+| n "-5") $ e 5 8 $ n "[0*1 12*2]*2" #expression (scale 0.8 1.0 rand) #dur (scale 0.2 1.0 rand)
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~2]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 $ (|-| n "24") $ n "[0*2]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 silence
+tidal> m4 silence
+tidal> m5 silence
+tidal>  m1 $ slow 1 $ e 5 8 $ midinote "36"
+tidal> m1 silence
+tidal> m1 $ n "[0 2 0*2 1]"
+tidal> m1 $ (|-| n "24") $ n "[0 2 0*2 1]"
+tidal> m1 $ (|-| n "24") $ n "[0 2 0*2 2]"
+tidal> m1 $ (|-| n "24") $ n "[0 2 0*2 2, 6*4]"
+tidal> m1 $ (|-| n "24") $ n "[0 2 0*2 2, 6*8]"
+tidal> m4 $ n "0*8"
+tidal> m4 $ (|-|) n "25" $ n "0*8"
+
+<interactive>:126:6: error:
+    • Couldn't match expected type ‘ParamPattern -> ParamPattern’
+                  with actual type ‘Pattern ParamMap’
+    • The first argument of ($) takes one argument,
+      but its type ‘Pattern ParamMap’ has none
+      In the second argument of ‘($)’, namely ‘(|-|) n "25" $ n "0*8"’
+      In the expression: m4 $ (|-|) n "25" $ n "0*8"
+
+<interactive>:126:12: error:
+    • Couldn't match type ‘Pattern Int -> ParamPattern’
+                     with ‘Pattern ParamMap’
+      Expected type: ParamPattern
+        Actual type: Pattern Int -> ParamPattern
+    • Probable cause: ‘n’ is applied to too few arguments
+      In the first argument of ‘(|-|)’, namely ‘n’
+      In the expression: (|-|) n "25"
+      In the second argument of ‘($)’, namely ‘(|-|) n "25" $ n "0*8"’
+tidal> m4 $ (|-| n "25") $ n "0*8"
+tidal> m5 $ (|-| n "13") $ n "0*8"
+tidal> 

@@ -1,0 +1,132 @@
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/coyarzun/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Tidal/ghci-tidal.conf
+tidal> import Sound.Tidal.MIDI.Context
+tidal> devices <- midiDevices
+tidal> m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 1"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  105  midi onset:  0 onset (relative):  "-0.105" , sched:  0
+and 3 more
+
+tidal> 
+tidal> m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  25354  midi onset:  25226 onset (relative):  "-0.128" , sched:  25226
+and 3 more
+
+tidal> m3 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  94728  midi onset:  94689 onset (relative):  "-0.039" , sched:  94689
+and 3 more
+
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+late t[i1d7a6l,>1 1,127] midi now  99357  midi onset:  99357 onset (relative):  "-0.000" , sched:  99357
+and 3 more
+
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 2"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> late [177,11,127] midi now  103728  midi onset:  103689 onset (relative):  "-0.039" , sched:  103689
+and 3 more
+
+tidal> m6 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 2 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [177,11,127] midi now  108228  midi onset:  108170 onset (relative):  "-0.058" , sched:  108170
+and 3 more
+
+tidal> m1 $ n "0*2"
+tidal> m1 $ (|-| n 24) $ n "[0*2, 6*8, ~3]"
+tidal> m4 $ (|-| n 24) $ n "[0*8]"
+tidal> m5 $ (|-| n 12) $ n "[0 12]*4"
+tidal> m6 $ (|+| n 12) $ n "[7 5 4 0 -6]"
+tidal> m1 $ (|-| n 24) $ n "[0*2, 6*8, ~4]"
+tidal> m6 silence
+tidal> m5 silence
+tidal> m4 silence
+tidal> m3 silence
+tidal> m2 silence
+tidal> m1 $ n "0*2"
+tidal> m1 $ n "0"
+tidal> m1 $ n "0*2"
+tidal> m1 $ n "[0*2, 6*8]"
+tidal> m1 $ soemtimes (|-| n "24") $ n "[0*2, 6*8]"
+
+<interactive>:31:6: error:
+    • Variable not in scope:
+        soemtimes
+          :: (ParamPattern -> ParamPattern) -> ParamPattern -> ParamPattern
+    • Perhaps you meant ‘sometimes’ (imported from Sound.Tidal.Context)
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 $ sometimes (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 $ sometimes (|-| n "24") $ n "[0*2, 6*8, ~3]"
+tidal> m2 $ n "0*2"
+tidal> m2 $ (|-| n 24) $ n "0*2"
+tidal> m4 $ n "0"
+tidal> m4 $ n "0*8"
+tidal> m4 $ (|-| n "24") $ n "0*8"
+tidal> m5 $ (|-| n "12") $ n "0*8"
+tidal> m5 $ sometimes (|-| n "12") $ n "0*8"
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "12") $ n "7 5 4 0 -6"
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "12") $ n "7 5 4 0"
+tidal> m6 $ (|+| n "12") $ sometimes (|+| n "12") $ n "7 5 4 0"
+tidal> m6 $ (|+| n "12") $ sometimes (|+| n "12") $ n "7 5 4 0" #dur (scale 0.1 10 rand)
+tidal> m4 $ (|-| n "24") $ sometimes (|+| n 1) $ n "0*8"
+tidal> m4 $ (|-| n "24") $ every 2 (|+| n 1) $ n "0*8"
+tidal> m4 $ (|-| n "24") $ every 2 (|+| n 1) $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ sometimes (|-| n "12") $ n "0*8" #dur (scale 0.1 2 rand)
+tidal> m1 $ sometimes (|-| n "24") $ n "[0*2, 6*8, ~4]"
+tidal> m3 $ (|-| n "24" ) $ n "~ 3"
+tidal> m6 $ (|+| n "12") $ sometimes (|+| n "12") $ n "[0, 7]" #dur (scale 0.1 10 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|+| n "12") $ n "[0, 7]" #dur (scale 0.1 1 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "12") $ n "[0, 7]" #dur (scale 0.1 1 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "12") $ rarely (|+| n 12)$ n "[0, 7]" #dur (scale 0.1 1 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "24") $ rarely (|+| n 12)$ n "[0, 7]" #dur (scale 0.1 1 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "24") $ rarely (|+| n 12)$ n "[0, 7]" #dur (scale 0.1 10 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "0") $ rarely (|+| n 12)$ n "[0, 7]" #dur (scale 0.1 10 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "0") $ rarely (|+| n 12)$ n "[0, 7]*8" #dur (scale 0.1 10 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "0") $ rarely (|+| n 24)$ n "[0, 7]*8" #dur (scale 0.1 10 rand)
+tidal> m6 $ (|+| n "12") $ sometimes (|-| n "0") $ rarely (|+| n 12)$ n "[0, 7]*8" #dur (scale 0.1 20 rand)
+tidal> m4 $ (|-| n "24") $ every 2 (|+| n 1) $ sometimes (|+| n 12) $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m2 silence
+tidal> m6 $ (|-| n "12") $ rarely (|+| n 24)$ n "[0, 7, 7 6]*8" #dur (scale 0.1 10 rand)
+tidal> m6 $ (|-| n "12") $ rarely (|+| n 24)$ n "[4]*8" #dur (scale 0.1 10 rand)
+tidal> m2 $ (|-| n 24) $ n "0*2"
+tidal> m4 $ (|-| n "20") $ every 2 (|+| n 1) $ sometimes (|+| n 12) $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "25") $ every 2 (|+| n 1) $ sometimes (|+| n 12) $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "25") $ sometimes (|+| n 12) $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m4 $ (|-| n "25") $ sometimes (|+| n 12) $ n "[0 12]*4" 
+tidal> m4 $ (|-| n "25") $ sometimes (|+| n 12) $ n "[0 12*2]*4"
+tidal> m4 $ (|-| n "25") $ n "[0 12*2]*4"
+tidal> m4 $ (|-| n "25") $ n "[0 12]*4"
+tidal> m5 silence
+tidal> m6 $ n "[0 4 5 7]"
+tidal> m6 $ n "[0*2 4*2 5*2 7*2]"
+tidal> m5 $ (|-| n 12) $ n "[0*2 4*2 5*2 7*2]"
+tidal> m6 $ (|-| n 1) $ n "[0, 7]*8"
+tidal> m6 $ sometimes (|+| n 12) $ (|-| n 1) $ n "[0, 7]*8"
+tidal> m6 $ sometimes (|+| n 12) $ (|-| n 1) $ n "[0, 7]*8" #dur(scale 0.1 20 rand)
+tidal> m5 $ (|-| n 12) $ sometimes (|+| n 12) $ (|-| n 1) $ n "[0, 7]*8" #dur(scale 0.1 20 rand)
+tidal> m6 $ sometimes (|+| n 12) $ (|-| n 1) $ every 2  (fast 2) $ n "[0, 7]*8" #dur(scale 0.1 20 rand)
+tidal> m3 silence
+tidal> m2 silence
+tidal> m6 $ sometimes (|+| n 24) $ (|-| n 1) $ every 2  (fast 2) $ n "[0, 7]*8" #dur(scale 0.1 20 rand)
+tidal> m2 $ (|-| n 24) $ n "0*2"
+tidal> m3 $ (|-| n "24" ) $ n "~ 3"
+tidal> m3 $ (|-| n "24" ) $ n "[~ 3, ~4]"
+tidal> m6 $ sometimes (|+| n 24) $ (|-| n 1) $ every 2  (fast 2) $ n "[0, 7]*8" #dur(scale 0.1 20 rand) #expression (scale 0.7 1.0 rand)
+tidal> m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+tidal> m6 silence
+tidal> m5 silence
+tidal> m6 $ sometimes (|+| n 24) $ (|-| n 1) $ every 2  (fast 2) $ n "[0, 7]*8" #dur(scale 0.1 20 rand)
+tidal> m5 silence
+tidal> m3 silence
+tidal> m2 silence
+tidal> m4 silence
+tidal> m6 silence
+tidal> m1 silence
+tidal> 

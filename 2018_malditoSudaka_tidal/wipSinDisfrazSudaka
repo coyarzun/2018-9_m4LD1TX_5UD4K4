@@ -1,0 +1,40 @@
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/coyarzun/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Tidal/ghci-tidal.conf
+tidal> import Sound.Tidal.MIDI.Context
+tidal> devices <- midiDevices
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 1"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [176,11,127] midi now  107  midi onset:  0 onset (relative):  "-0.106" , sched:  0
+and 3 more
+
+tidal> m4 $ n "0 0 7 7 5 5 10 10 12"
+tidal> m4 $ (|-| n "24") $ n "0 0 7 7 5 5 10 10 12" 
+tidal> m4 $ (|-| n "24") $ n "0 0 7 7 7 5 5 10 10 12"		
+
+<interactive>:7:47: warning: [-Wtabs]
+    Tab character found here, and in one further location.
+    Please use spaces instead.
+tidal> m4 $ (|-| n "24") $ n "0 0 7 7 7 5 5 10 10 12"
+tidal> m4 $ (|-| n "24") $ n "[0 0 7 7 7 5 5 10 10 12]"
+tidal> m4 $ (|-| n "24") $ n "[0 0 7 ~ 7 7 5 5 10 10 12]"
+tidal> m4 $ (|-| n "24") $ n "[[0 0 7] [~ 7 7 5 5 10 10 12]"
+tidal> m4 $ (|-| n "24") $ n "[[0 0 7] [~ 7 7 5 5 10 10 12]]"
+tidal> m4 $ (|-| n "24") $ n "[[0 [0 7] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]"
+tidal> m4 $ (|-| n "24") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]"
+tidal> m4 $ slow 2 $ (|-| n "24") $ n "[[0 [0 7]] [[~ 7] 7] [5 [5 10]]  [[~ 10] 12]]" 
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 2"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> late [177,11,127] midi now  567996  midi onset:  567900 onset (relative):  "-0.097" , sched:  567900
+and 3 more
+
+tidal> m5 $ (|-| n "24") $ n "[0 0 7 7 7 5 5 10 10 12]"
+tidal> m5 $ (|-| n "24") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 2 $ (|-| n "24") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 2 $ (|-| n "12") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "12") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "0") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> m5 $ slow 1.5 $ (|-| n "-12") $ n "[0 0 7 ~ 7 7 5 5 10 ~ 10 12]"
+tidal> 

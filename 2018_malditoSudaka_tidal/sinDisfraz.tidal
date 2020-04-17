@@ -1,0 +1,22 @@
+import Sound.Tidal.MIDI.Context
+
+putStrLn =<< displayOutputDevices
+devices <- midiDevices
+m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+m3 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+
+
+
+m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+
+m5 $ midinote "[[64 [64 71]] [[~ 71] 71] [69 [69 74]] [[~ 74] 76]  [64 [64 71]] [[~ 71] 71] [69 [69 74]] [[~ 74] 76]  [66 [66 73]] [[~ 73] 72] [71 [71 76]] [[~ 76] 78]  [66 [66 73]] [[~ 73] 73] [71 [71 76]] [[~ 76] 78]  ]/8"
+
+m1 $ midinote "[36 38 [36 36] 38]/2"
+m2 $ midinote "42*8"
+
+
+m5 $ midinote "[[64 [64 71]] [[~ 71] 71] [69 [69 74]] [[~ 74] 76]  [64 [64 71]] [[~ 71] 71] [69 [69 74]] [[~ 74] 76]  [66 [66 73]] [[~ 73] 72] [71 [71 76]] [[~ 76] 78]  [66 [66 73]] [[~ 73] 73] [71 [71 76]] [[~ 76] 78]  ]/8" # velocity (scale 0.1 0.9 rand) # dur (scale 0.1 0.4 sine1) # expression (scale 0.7 1.0 sine)
+

@@ -1,0 +1,187 @@
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/coyarzun/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Tidal/ghci-tidal.conf
+tidal> import Sound.Tidal.MIDI.Context
+tidal> devices <- midiDevices
+tidal> m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 1"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  114  midi onset:  0 onset (relative):  "-0.114" , sched:  0
+and 3 more
+
+tidal> m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [185,11,127] midi now  4863  midi onset:  4785 onset (relative):  "-0.078" , sched:  4785
+and 3 more
+
+tidal> m3 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> 
+late [185,11,127] midi now  11237  midi onset:  11173 onset (relative):  "-0.064" , sched:  11173
+and 3 more
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [176,11,127] midi now  15365  midi onset:  15303 onset (relative):  "-0.061" , sched:  15303
+and 3 more
+
+tidal> m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> 
+late [176,11,127] midi now  23613  midi onset:  23505 onset (relative):  "-0.107" , sched:  23505
+and 3 more
+tidal> m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+Opened: "CoreMIDI": "Dispositivo MIDI USB Puerto 2"
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 2'
+tidal> late [177,11,127] midi now  28989  midi onset:  28960 onset (relative):  "-0.029" , sched:  28960
+and 3 more
+
+tidal> m6 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 2 synthController
+Cached Device Output
+Successfully initialized Device 'Dispositivo MIDI USB Puerto 1'
+tidal> late [177,11,127] midi now  38614  midi onset:  38585 onset (relative):  "-0.027" , sched:  38585
+and 3 more
+
+tidal> m1 $ n "0"
+tidal> m1 $ (|-| n "24") $ n "0"
+tidal> m1 $ (|-| n "24") $ n "[0*2]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~3]"
+tidal> m1 $ (|-| n "24") $ n "[0*2, 6*8, ~4]"
+tidal> m4 $ n "0"
+tidal> m4 $ n "0*8"
+tidal> m4 $ (|-| n "24") $ n "0*8"
+tidal> m4 $ (|-| n "24") $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ (|-| n "12") $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 silence
+tidal> m5 $ (|-| n "12") $ n "0*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ n "[0, 7]*8"
+tidal> m6 $ sometimes (|+| n "12") $ n "[0, 7]*8"
+tidal> late [153,42,63] midi now  544311  midi onset:  544208 onset (relative):  "-0.083" , sched:  544208
+and 5 more
+late [176,1,35] midi now  544314  midi onset:  544208 onset (relative):  "-0.086" , sched:  544208
+and 2 more
+late [177,1,35] midi now  544315  midi onset:  544208 onset (relative):  "-0.087" , sched:  544208
+and 2 more
+
+tidal> 
+tidal> 
+tidal> m6 $ sometimes (|-| n "12") $ n "[0, 7]*8"
+tidal> m6 $ sometimes (|-| n "12") $ n "[0, 7]*8" #dur (scale 0.1 10.0 rand)
+tidal> m2 $ e 5 8 $ n "0"
+tidal> m2 silence
+tidal> m6 silence
+tidal> m5 silence
+tidal> m1 silence
+tidal> m4 silence
+tidal> m1 $ n "0"
+
+tidal> m1 $ n "0*2"
+tidal> m1 $ n "0*2, 6"
+tidal> m1 $ n "[0*2, 6*8]"
+tidal> m1 $ sometimes (|-| n "24") $ n "[0*2, 6*8]"
+tidal> m2 $ n "0"
+tidal> m2 $ (|-| n "24")$ n "0"
+tidal> m1 $ sometimes (|-| n "24") $ n "[6*8]"
+tidal> m2 $ (|-| n "24")$ n "0"
+tidal> m2 $ (|-| n "24")$ n "0*2"
+tidal> m4 $ (|-| n "24") $ n "4"
+tidal> m4 $ (|-| n "24") $ n "4*4"
+tidal> m4 $ (|-| n "24") $ n "4*8"
+tidal> m3 $ (|-| n "24") $ n "~3"
+tidal> m6 $ n "4"
+tidal> m5 $ n "4"
+tidal> m5 $ n "[0, 6, 4]"
+tidal> m5 $ n "[0, 6, 4]*4"
+tidal> m5 $ sometimes (|+| n "12") $ n "[0, 6, 4]*4"
+tidal> m5 $ sometimes (|+| n "12") $ n "[0*2 6 4*2]*4"
+tidal> m6 $ n "[4, 13]*8"
+tidal> m6 $ sometimes (|+| n "12") $ n "[4, 13]*8"
+tidal> m6 $ sometimes (|+| n "12") $ n "[4, 13]*8" #dur (scale 0.1 10.0 rand)
+tidal> m4 $ (|-| n "24") $ n "4*8" #expression (scale 0.7 1.0 rand)
+tidal> m5 $ sometimes (|+| n "12") $ n "[0*2 6 4*2]*4" #expression (scale 0.7 1.0 rand)
+tidal> m3 silence
+tidal> m3 $ (|-| n "24") $ n "~3"
+tidal> m3 $ (|-| n "24") $ n "~4"
+tidal> m4 $ (|-| n "29") $ n "4*8" #expression (scale 0.7 1.0 rand)
+tidal> m4 $ (|-| n "24") $ n "4*8" #expression (scale 0.7 1.0 rand)
+tidal> m4 $ (|-| n "29") $ n "4*8" #expression (scale 0.7 1.0 rand)
+tidal> m4 $ (|-| n "25") $ n "0*8 " #expression (scale 0.7 1.0 rand)
+tidal> m4 $ (|-| n "25") $ n "0*8 "
+tidal> m4 $ (|-| n "25") $ n "0*2 4*2 5*2 7*2"
+tidal> m5 $ (|-| n "13") $ n "0*2 4*2 5*2 7*2"
+tidal> m5 $ (|-| n "13") $ n "0*2 4*2 5*2 7*2" #expression (scale 0.7 1.0 rand)
+tidal> m6 $ sometimes (|+| n "12") $ n "[7 4 4 0 ]*8" #dur (scale 0.1 10.0 rand)
+tidal> m6 $ sometimes (|+| n "12") $ n "[7 4 4 0 ]*8" 
+tidal> m6 $ sometimes (|+| n "12") $ n "[7 4 5 0 ]*8"
+tidal> m6 $ sometimes (|+| n "12") $ n "[7 4 5 0 -6]*8"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6]*8"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6]"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6, 7]*8"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6]*8"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6]*4"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6]"
+tidal> m5 $ (|-| n "13") $ n "0*2 4*2 5*2 7*2"
+tidal> m6 $ sometimes (|-| n "12") $ n "[7 4 5 0 -6, 7]*8"
+tidal> m4 $ (|-| n "12") $ n "4"
+tidal> m6 $ sometimes (|+| n "12") $ n "[7 4 5 0 -6, 7]*8"
+tidal> m6 $ sometimes (|+| n "24") $ n "[7 4 5 0 -6, 7]*8"
+tidal> m6 silence
+tidal> m6 silence
+tidal> m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+tidal> m6 $ slow 2 $ (|-| n "24") $ rarely (|+| n "12") $ n "[11, 4*8]*2" #dur (scale 0.1 1.0 rand) #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ (|-| n "24") $ n "4"
+tidal> m3 silence
+tidal> m6 silence
+tidal> m5 silence
+tidal> m4 $ (|-| n "24") $ n "4*8"
+tidal> m5 $ sometimes (|+| n "12") $ (|-| n "24") $ n "4*8"
+tidal> m5 $ sometimes (|+| n "12") $ (|-| n "12") $ n "4*8"
+tidal> m6 $ (|-| n "12") $ n "[4, 11]*8"
+tidal> m6 $ sometimes (|+| n "24")$ (|-| n "12") $ n "[4, 11]*8"
+tidal> m3 $ (|-| n "24") $ n "~ 4"
+tidal> m6 $ sometimes (|+| n "0")$ (|-| n "12") $ n "[4, 11]*8"
+tidal> m4 $ (|-| n "24") $ n "4*2 16*2 4*2 16*2"
+tidal> m1 $ (|-| n "24") $ n "4*8"
+tidal> m1 $ (|-| n "24") $ n "6*8"
+tidal> m4 $ (|-| n "24") $ n "4*2 16*2 4*2 16*2" #modwheel (scale 0.0 1.0 rand)
+tidal> m5 $ sometimes (|+| n "12") $ (|-| n "12") $ n "4*8" #modwheel (scale 0.0 1.0 rand)
+tidal> m6 $ rarely slow 2 $ sometimes (|+| n "0")$ (|-| n "12") $ n "[4, 11]*8"
+
+<interactive>:114:6: error:
+    • Couldn't match expected type ‘Pattern ParamMap -> ParamPattern’
+                  with actual type ‘Pattern Time’
+    • The first argument of ($) takes one argument,
+      but its type ‘Pattern Time’ has none
+      In the second argument of ‘($)’, namely
+        ‘rarely slow 2
+         $ sometimes (|+| n "0") $ (|-| n "12") $ n "[4, 11]*8"’
+      In the expression:
+        m6
+        $ rarely slow 2
+          $ sometimes (|+| n "0") $ (|-| n "12") $ n "[4, 11]*8"
+
+<interactive>:114:13: error:
+    • Couldn't match type ‘Pattern a0 -> Pattern a0’
+                     with ‘Pattern Time’
+      Expected type: Pattern Time -> Pattern Time
+        Actual type: Pattern Time -> Pattern a0 -> Pattern a0
+    • Probable cause: ‘slow’ is applied to too few arguments
+      In the first argument of ‘rarely’, namely ‘slow’
+      In the expression: rarely slow 2
+      In the second argument of ‘($)’, namely
+        ‘rarely slow 2
+         $ sometimes (|+| n "0") $ (|-| n "12") $ n "[4, 11]*8"’
+tidal> m6 $ rarely (slow 2) $ sometimes (|+| n "0")$ (|-| n "12") $ n "[4, 11]*8"
+tidal> m6 $ rarely (slow 2) $ sometimes (|+| n "0")$ (|-| n "12") $ n "[4, 11]*8" #dur (scale 0.1 20.0 rand)
+tidal> m4 $ (|-| n "24") $ n "4*8"
+tidal> m4 $ every 4 (|+| n "1") $ (|-| n "24") $ n "4*8"
+tidal> m3 silence
+tidal> m6 silence
+tidal> m5 silence
+tidal> m1 silence
+tidal> m6 $ rarely (slow 2) $ sometimes (|+| n "0")$ (|-| n "12") $ n "[4, 11]*8" #dur (scale 0.1 20.0 rand)
+tidal> m3 $ (|-| n "24") $ n "~ 4"
+tidal> 

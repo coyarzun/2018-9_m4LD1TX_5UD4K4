@@ -1,0 +1,268 @@
+import Sound.Tidal.MIDI.Context
+devices <- midiDevices
+m1 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+m2 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+m3 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 10 synthController
+m4 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 1 synthController
+m5 <- midiStream devices "Dispositivo MIDI USB Puerto 2" 2 synthController
+m6 <- midiStream devices "Dispositivo MIDI USB Puerto 1" 2 synthController
+
+m1 $ (|-| n "24") $ n "[0*2, 6*8, ~2]"
+m4 $ (|-| n "24") $ n "[2*2, 7*8, ~9]"
+m5 $ (|-| n "12") $ n "[0*2, 6*8, ~2]"
+m5 $ slow 2 $ (|-| n "12") $ n "[0*2, 6*8, ~2]"
+m5 $ slow 2 $ (|-| n "12") $ n "[0*2, 6*8, ~2]*2"
+m5 $ slow 2 $ (|-| n "0") $ n "[0*2, 6*8, ~2]*2"
+m6 $ slow 2 $ (|-| n "12") $ n "[0*2, 6*8, ~2]*2"
+m6 $ slow 2 $ (|-| n "12") $ n "[2*8, 7*8]*2"
+m6 $ slow 2 $ (|-| n "-12") $ n "[2*8, 7*8]*2"
+m6 $ slow 2 $ (|-| n "-12") $ n "[2*8, 7*8, -10*8, -5*6 ]*2"
+m6 $ slow 2 $ (|-| n "-12") $ n "[2*8, 7*5, -10*8, -5*6 ]*2"
+m6 $ slow 2 $ (|-| n "-12") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 10.0 rand)
+m6 $ slow 2 $ (|-| n "-12") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 10.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 2 $ (|-| n "-12") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 1 $ (|-| n "-12") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 4 $ (|-| n "-12") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 4 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 4 $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 4 $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m5 $ n "2"
+m5 $ e 5 8 $ n "2"
+m5 $ e 5 8 $ n "2" #dur (scale 0.5 2 rand)
+m5 $ e 5 8 $ n "2" #dur (scale 0.5 2 rand) #expression (scale 0.5 1.0 tri)
+m2 $ e 5 8 $ n (irand 9)
+m2 $ e 5 8 $ n (irand 9) #expression "1.0"
+m2 $ e 5 8 $ n (irand 9) #expression 1.0
+m6 $ slow 2 $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m4 $ (|-| n "24") $ n "2*8"
+m4 $ every 4 (|+| n "1") $ (|-| n "24") $ n "2*8"
+m6 $ slow 2 $ sometimes (|+| n "24") $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 silence
+m6 $ slow 2 $ sometimes (|+| n "24") $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 $ slow 2 $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+m1 $ (|-| n "24") $ n "[0*2]"
+m5 silence
+m1 silence
+m4 silence
+m2 silence
+m6 silence
+m1 $ (|-| n "24") $ n "[0*2]"
+m6 $ slow 2 $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m1 $ (|-| n "24") $ n "[0*2, 6*8]"
+m4 $ every 4 (|+| n "1") $ (|-| n "24") $ n "2*8"
+m6 $ slow 2 $ sometimes (fast 2) $ e 5 8 $ (|-| n "0") $ n "[2*8, 7*5, -10*8, -5*6 ]*2" #dur (scale 0.1 20.0 rand) #expression (scale 0.5 1.0 rand)
+m6 silence
+m4 silence
+m1 silence
+m5 silence
+m4 $ n "0*3 12*3"
+m4 $ (|-| n "24") $ n "0*3 12*3"
+m4 $ (|-| n "24") $ n "0*4 12*3"
+m1 $ n "[0 0*2]"
+m1 $ n "[0 2 0*2 2]"
+m1 $ (|-| n "24") $ n "[0 2 0*2 2]"
+m1 $ (|-| n "24") $ n "[0 2 0*2 2, 6*4]"
+m1 $ (|-| n "24") $ n "[0 2 0*2 2, 6*6]"
+m4 $ (|-| n "24") $ n "[0*4 12*3, 5*8]"
+m4 $ (|-| n "24") $ n "[0*4 12*3]"
+m6 $ (|-| n "24") $ n "[0*4 12*3, 5*8]"
+m6 $ (|-| n "0") $ n "[0*4 12*3, 5*8]"
+m6 $ (0.25 <~) $ (|-| n "0") $ n "[0*4 12*3, 5*8]"
+m6 $ (0.125 <~) $ (|-| n "0") $ n "[0*4 12*3, 5*8]"
+m4 silence
+m6 silence
+m1 silence
+m1 $ n "2 0*2"
+m1 $ (|-| n "24")  $ n "2 0*2"
+m1 $ (|-| n "24")  $ n "2 0+2 2 0"
+m2 $ e 5 8 $ n "0"
+m2 $ sometimes (|-| n "24") $ e 5 8 $ n "0"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 6*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 7*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 8*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 9*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 10*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 11*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 12*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 13*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 14*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 15*3]"
+m1 $ (|-| n "24")  $ n "[2 0+2 2 0, 6*6]"
+m4 $ n "0 4 5 7"
+m4 $ (|-| n "24") $ n "0 4 5 7"
+m4 $ (|-| n "24") $ n "0*2 4*2 5*2 7*2"
+m6 $ (|-| n "24") $ n "0*2 4*2 5*2 7*2"
+m6 $ (|-| n "0") $ n "0*2 4*2 5*2 7*2"
+m6 $ (|-| n "0") $ n "[0*2 4*2 5*2 7*2, 5*8]"
+m6 $ (|-| n "0") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]"
+m6 $ (|-| n "0") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 20 rand)
+m6 $ (|-| n "0") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 10 rand)
+m6 $ (|-| n "0") $ sometimes (|+| n "12") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 10 rand)
+m6 $ (|-| n "0") $ sometimes (|+| n "17") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 10 rand)
+m6 $ (|-| n "0") $ sometimes (|+| n "17") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 10 rand) #expression (scale 0.1 1.0 tri)
+m6 $ (|-| n "0") $ sometimes (|+| n "17") $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 10 rand) #expression (scale 0.1 1.0 rand)
+m6 $ (|-| n "0") $ sometimes (|+| n "17") $ sometimes (fast 2) $ n "[0*2 4*2 5*2 7*2, 5*8, 17*3]" #dur (scale 0.1 10 rand) #expression (scale 0.1 1.0 rand)
+cps 0.5
+cps 0.75
+m1 silence
+m1 $ n "[0 2 0*2]"
+m1 $ (|-| n "24") $ n "[0 2 0*2]"
+m1 silence
+m1 $ (|-| n "24") $ n "[0 2 0*2]"
+m2 silence
+m3 silence
+m4 silence
+m1 silence
+m6 silence
+m1 $ n "0"
+m1 $ n "0*2 2"
+m1 $ (|-| n "24") $ n "0*2 2"
+m1 $ (|-| n "24") $ n "0 2 0*2 2"
+m1 $ (|-| n "22") $ n "0 4 5 7"
+m1 $ (|-| n "24") $ n "0*2 2"
+m1 $ (|-| n "22") $ n "0 4 5 7"
+m1 $ (|-| n "24") $ n "0*2 2"
+m1 $ (|-| n "24") $ n "0 2 0*2 2"
+m4 $ (|-| n "22") $ n "0*2 2"
+m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+cps 1.0
+m6 $ n "0*8, 5*6"
+m6 $ n "[0*8, 5*6]"
+m6 $ (|-| n "-2") $ n "[0*8, 5*6]"
+m6 $ (|-| n "4") $ n "[0*8, 5*6]"
+m6 $ (|+| n "4") $ n "[0*8, 5*6]"
+m6 $ every 2 (|-| n "24") $ (|+| n "4") $ n "[0*8, 5*6]"
+m6 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6]"
+m6 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6]*2"
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6]*2"
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6]*2" #dur (scale 0.1 5 rand)
+m5 $ n "4*8"
+m5 $ (|-| n "12") $ n "4*8"
+m5 $ (|-| n "12") $ n "[4*8, 11]"
+m5 $ (|-| n "12") $ n "[4*8, 11]" # dur (scale 0.1 10 rand)
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -24, -18]*2" #dur (scale 0.1 5 rand)
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -24, -10]*2" #dur (scale 0.1 5 rand)
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand)
+cps 0.75
+m6 silence
+m2 $ n "6"
+m2 $ (|-| n "24") $ n "6"
+m2 $ (|-| n "24") $ n "6*16"
+m2 $ (|-| n "24") $ n "6*8"
+m2 $ sometimes (fast 2) $ (|-| n "24") $ n "6*8"
+m2 $ sometimes (fast 2) $ (|-| n "24") $ n "6*4"
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand)
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.2
+m6 $ slow 2 $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+cps 1.0
+m6 $ slow 2 $ sometimes (silence) $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+
+m1 silence
+m5 silence
+m6 silence
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m6 silence
+m2 $ sometimes (fast 2) $ (|-| n "24") $ n "6*4"
+m2 silence
+m4 silence
+m2 silence
+m2 $ sometimes (fast 2) $ (|-| n "24") $ n "6*4"
+m2 silence
+m2 $ sometimes (fast 2) $ (|-| n "24") $ n "6*4"
+m4 $ midinote "[[40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [40 [40 47]] [[~ 47] 47] [45 [45 50]] [[~ 50] 52]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  [42 [42 49]] [[~ 49] 49] [47 [47 52]] [[~ 52] 54]  ]/8"
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m5 $ (|-| n "12") $ n "[4*8, 11]" # dur (scale 0.1 10 rand)
+m1 $ (|-| n "24") $ n "0 2 0*2 2"
+m1 silence
+m5 silence
+m1 $ e 5 8 $ n "-24"
+m3 $ n " -22"
+m3 $ n "
+m3 $ n "~ -22"
+m4 silence
+m6 silence
+m1 silence
+m2 silence
+m3 silence
+cps 0.5
+m1 $ n "0"
+m1 $ e 6 12$ n "0"
+m1 $ e 11 12 $ n "0"
+m1 $ n "0"
+
+m1 $ e 5 8 $ n "0"
+m1 $ e 7 8 $ n "0"
+m1 $ e 7 16 $ n "0"
+m1 $ e 7 8 $ n "0"
+m1 $ n "0*3"
+m1 $ (|-| n "24") $ n "0*3"
+m2 $ (|-| n "24") $ n "6*6"
+m4 $ (|-| n "36") $ n "4*8"
+m4 $ (|-| n "36") $ n "4*6"
+m4 $ (|-| n "36") $ n "4*12"
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m5 $ (|-| n "12") $ n "[4, 9, 11, 16]"
+m5 $ (|-| n "12") $ n "4 9 11 16"
+m5 $ sometimes (fast 2) $ (|-| n "12") $ n "4 9 11 16"
+m3 $ slow 2 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ e 5 8 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ e 5 6 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 4) $ e 5 6 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand)
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand) #expression (scale 0.6 1.0 rand)
+m3 $ slow 2 $ sometimes (fast 6) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand) #expression (scale 0.6 1.0 rand)
+m3 $ slow 2 $ sometimes (fast 4) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand) #expression (scale 0.6 1.0 rand)
+
+m1 silence
+m2 silence
+m3 silence
+m4 silence
+m5 silence
+m6 silence
+m1 $ n "0*3"
+m1 $ (|-| n "24") $ n "0*3"
+m2 $ (|-| n "24") $ n "6*6"
+m4 $ (|-| n "36") $ n "4*8"
+m4 $ (|-| n "36") $ n "4*12"
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m5 $ (|-| n "12") $ n "[4, 9, 11, 16]"
+m5 $ (|-| n "12") $ n "4 9 11 16"
+m5 $ sometimes (fast 2) $ (|-| n "12") $ n "4 9 11 16"
+m3 $ slow 2 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ e 5 8 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand)
+m3 $ slow 2 $ sometimes (fast 4) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand) #expression (scale 0.6 1.0 rand)
+m1 silence
+m1 $ (|-| n "24") $ n "0*3"
+m1 silence
+m2 silence
+m3 silence
+m4 silence
+m3 silence
+m6 silence
+m5 silence
+m1 $ n "0*3"
+m1 $ (|-| n "24") $ n "0*3"
+m2 $ (|-| n "24") $ n "6*6"
+m4 $ (|-| n "36") $ n "4*12"
+m6 $ slow 2 $ sometimes (|*| dur "0") $ every 2 (|+| n "2") $ (|+| n "4") $ n "[0*8, 5*6, -12, -5]*2" #dur (scale 0.1 5 rand) #expression 0.1
+m5 $ (|-| n "12") $ n "[4, 9, 11, 16]"
+m5 $ (|-| n "12") $ n "4 9 11 16"
+m5 $ sometimes (fast 2) $ (|-| n "12") $ n "4 9 11 16"
+m3 $ slow 2 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand)
+m3 $ slow 2 $ sometimes (fast 4) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand) #expression (scale 0.6 1.0 rand)
+m3 $ slow 2 $ (|-| n "24") $ n "2"
+m3 $ slow 2 $ sometimes (fast 4) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand) #expression (scale 0.6 1.0 rand)
+m3 $ slow 2 $ sometimes (fast 8) $ e 5 6 $ (|-| n "24") $ n "2" #dur (scale 0.4 1.0 rand)
+m3 silence
+m1 silence
+m5 silence
+m2 silence
+m4 silence
+m6 silence
